@@ -56,12 +56,12 @@
         <div class="p-col-2 p-p-2">
           <button pButton type="button" (click)="removePurpose(i)" label="Delete" icon="pi pi-trash"></button>
         </div>
-        <div
+      </div>
+      <div
       *ngIf="leaveForm.controls.purpose.invalid && (leaveForm.controls.purpose.dirty || leaveForm.controls.purpose.touched)"
       class="alert alert-danger">
-      <small *ngIf="leaveForm.controls.purpose.errors?.required" class="p-error">Purpose is required.</small>
+      <small *ngIf="leaveForm.controls.purpose.errors?.invalid" class="p-error">Purpose is required.</small>
     </div>
-      </div>
     </div>
     <div class="p-mb-2 p-field p-col-2">
       <button pButton type="button" label="Add Purpose" (click)="addPurpose()"></button>
