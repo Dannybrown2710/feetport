@@ -38,7 +38,7 @@ export class CreateLeaveComponent implements OnInit {
 
   addPurpose() {
     //(this.leaveForm.get('purpose') as FormArray).push(this.createPurpose());
-    this.purpose.push(new FormControl(''));
+    this.purpose.push(new FormControl('', Validators.required));
     console.log(this.leaveForm.value);
   }
   createPurpose() {
