@@ -16,7 +16,7 @@ import { MessageService, SelectItem } from 'primeng/api';
   providers: [MessageService],
 })
 export class CreateLeaveComponent implements OnInit {
-  purpose = new FormArray([], this.validatePurpose);
+  purpose = new FormArray([this.createPurpose()], this.validatePurpose);
   leaveForm = this.fb.group({
     leavetype: new FormControl('', Validators.required),
     is_caary_forward: new FormControl('', Validators.required),
@@ -43,6 +43,9 @@ export class CreateLeaveComponent implements OnInit {
   }
   createPurpose() {
     return new FormControl('', Validators.required);
+  }
+  removePurpose(index: number){
+    this.purpose.removeAt(index);
   }
   validatePurpose(control: AbstractControl): { [key: string]: any } | null {
     if (control.value && control.value.length <= 0) {
