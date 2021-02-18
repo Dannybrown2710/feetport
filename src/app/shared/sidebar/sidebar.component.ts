@@ -5,18 +5,12 @@ import { ItemModel } from './ItemModel';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.css'],
 })
-export class SidebarComponent implements OnInit {
-  @Input()
-  sidebarItems!: ItemModel[]
-  constructor() { }
+export class SidebarComponent {
+  constructor() {}
   items: MenuItem[] = [];
-
-  ngOnInit() {
-      this.sidebarItems.forEach((item:ItemModel) => {
-        this.items.push( {label: item.label, icon: item.icon, routerLink:item.routerLink})
-      })
+  @Input() set sidebarItems(value: ItemModel[]) {
+    this.items = value;
   }
-
 }

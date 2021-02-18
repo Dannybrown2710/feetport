@@ -1,1 +1,18 @@
-<p>list-leaves works!</p>
+<p-table [value]="leaves">
+  <ng-template pTemplate="header">
+      <tr>
+          <th>Code</th>
+          <th>Title</th>
+          <th>Carry Forward?</th>
+          <th>Purpose</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-car>
+      <tr>
+          <td>{{car.code}}</td>
+          <td>{{car.title}}</td>
+          <td>{{car.is_carry_forward}}</td>
+          <td>{{car.purpose}}</td>
+      </tr>
+  </ng-template>
+</p-table>
