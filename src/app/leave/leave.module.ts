@@ -10,13 +10,12 @@ import { ListLeavesComponent } from './list-leaves/list-leaves.component';
 import { LeaveRoutingModule } from './leave-routing.module';
 import {TableModule} from 'primeng/table';
 import { MessageModule } from 'primeng/message';
-import { MessagesModule } from 'primeng/messages';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ToggleButtonModule} from 'primeng/togglebutton';
-
+import {MessagesModule} from 'primeng/messages';
 @NgModule({
   declarations: [LeaveComponent, CreateLeaveComponent, DeleteLeaveComponent, ListLeavesComponent, PageNotFoundComponent],
   imports: [

@@ -3,26 +3,68 @@
     <div class="p-field p-col-12 p-md-6">
       <label for="leavetype">Leave Type</label>
       <input id="leavetype" formControlName="leavetype" type="text" pInputText>
+      <div
+        *ngIf="leaveForm.controls.leavetype.invalid && (leaveForm.controls.leavetype.dirty || leaveForm.controls.leavetype.touched)"
+        class="alert alert-danger">
+        <small *ngIf="leaveForm.controls.leavetype.errors?.required" class="p-error">Leave type is required.</small>
+      </div>
     </div>
     <div class="p-field p-col-12 p-md-6">
-      <label for="leavetype">Code</label>
-      <input id="leavetype" formControlName="code" type="text" pInputText>
+      <label for="code">Code</label>
+      <input id="code" formControlName="code" type="text" pInputText>
+      <div
+        *ngIf="leaveForm.controls.code.invalid && (leaveForm.controls.code.dirty || leaveForm.controls.code.touched)"
+        class="alert alert-danger">
+        <small *ngIf="leaveForm.controls.code.errors?.required" class="p-error">Code is required.</small>
+      </div>
     </div>
     <div class="p-field p-col-12">
-      <p-toggleButton id="ispr" onIcon="pi pi-check" offIcon="pi pi-times" formControlName="is_proof_required"></p-toggleButton>
+      <p-toggleButton id="ispr" onIcon="pi pi-check" offIcon="pi pi-times" formControlName="is_proof_required">
+      </p-toggleButton>
       <label for="ispr" style="margin-left: 10px">Is Proof Required</label>
+      <div
+        *ngIf="leaveForm.controls.is_proof_required.invalid && (leaveForm.controls.is_proof_required.dirty || leaveForm.controls.is_proof_required.touched)"
+        class="alert alert-danger">
+        <small *ngIf="leaveForm.controls.is_proof_required.errors?.required" class="p-error">Field is required.</small>
+      </div>
     </div>
     <div class="p-field p-col-12">
-      <p-toggleButton id="iscr"  onIcon="pi pi-check"  offIcon="pi pi-times" formControlName="is_caary_forward"></p-toggleButton>
+      <p-toggleButton id="iscr" onIcon="pi pi-check" offIcon="pi pi-times" formControlName="is_caary_forward">
+      </p-toggleButton>
       <label for="iscr" style="margin-left: 10px">Is Carry Forward</label>
+      <div
+      *ngIf="leaveForm.controls.is_caary_forward.invalid && (leaveForm.controls.is_caary_forward.dirty || leaveForm.controls.is_caary_forward.touched)"
+      class="alert alert-danger">
+      <small *ngIf="leaveForm.controls.is_caary_forward.errors?.required" class="p-error">Field is required.</small>
+    </div>
     </div>
     <div class="p-field p-col-12">
-      <label for="leavetype">Priority</label>
-      <input id="leavetype" formControlName="priority" type="text" pInputText>
+      <label for="priority">Priority</label>
+      <input id="priority" formControlName="priority" type="text" pInputText>
+      <div
+      *ngIf="leaveForm.controls.priority.invalid && (leaveForm.controls.priority.dirty || leaveForm.controls.priority.touched)"
+      class="alert alert-danger">
+      <small *ngIf="leaveForm.controls.priority.errors?.required" class="p-error">Priority is required.</small>
     </div>
-    <div class="p-field p-col-12">
-      <label for="leavetype">Purpose</label>
-      <input id="leavetype" formControlName="purpose" type="text" pInputText>
+    </div>
+    <div class="p-col-12" formArrayName="purpose">
+      <div class="p-grid" *ngFor="let pur of purpose.controls; let i = index">
+        <div class="p-col-8 p-p-2">
+          <input pInputText [formControlName]="i" placeholder="Purpose">
+
+        </div>
+        <div class="p-col-2 p-p-2">
+          <button pButton type="button" (click)="removePurpose(i)" label="Delete" icon="pi pi-trash"></button>
+        </div>
+      </div>
+      <div
+      *ngIf="leaveForm.controls.purpose.invalid && (leaveForm.controls.purpose.dirty || leaveForm.controls.purpose.touched)"
+      class="alert alert-danger">
+      <small *ngIf="leaveForm.controls.purpose.errors?.invalid" class="p-error">Purpose is required.</small>
+    </div>
+    </div>
+    <div class="p-mb-2 p-field p-col-2">
+      <button pButton type="button" label="Add Purpose" (click)="addPurpose()"></button>
     </div>
     <div class="p-field p-col-12 p-md-12">
       <button pButton type="submit" label="Submit" [disabled]="!leaveForm.valid"></button>
