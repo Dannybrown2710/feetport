@@ -1,3 +1,4 @@
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LeaveComponent } from './leave.component';
@@ -8,7 +9,6 @@ import { DeleteLeaveComponent } from './delete-leave/delete-leave.component';
 import { ListLeavesComponent } from './list-leaves/list-leaves.component';
 import { LeaveRoutingModule } from './leave-routing.module';
 import {TableModule} from 'primeng/table';
-import { FetchLeavesService } from './fetch-leaves.service';
 import { MessageModule } from 'primeng/message';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
@@ -17,7 +17,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import {MessagesModule} from 'primeng/messages';
 @NgModule({
-  declarations: [LeaveComponent, CreateLeaveComponent, DeleteLeaveComponent, ListLeavesComponent],
+  declarations: [LeaveComponent, CreateLeaveComponent, DeleteLeaveComponent, ListLeavesComponent, PageNotFoundComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -32,6 +32,6 @@ import {MessagesModule} from 'primeng/messages';
     CheckboxModule,
     ToggleButtonModule
   ],
-  providers:[FetchLeavesService]
+  providers:[]
 })
 export class LeaveModule { }

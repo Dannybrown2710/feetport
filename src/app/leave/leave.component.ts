@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Permission } from './../utils/user.model';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../utils/auth.service';
 import { ItemModel } from '../shared/sidebar/ItemModel';
-import { FetchLeavesService } from './fetch-leaves.service';
 
 @Component({
   selector: 'app-leave',
   templateUrl: './leave.component.html',
   styleUrls: ['./leave.component.css'],
 })
-export class LeaveComponent implements OnInit {
+export class LeaveComponent implements OnInit, OnDestroy {
+  subscriptions = new Subscription();
   userContext!: string | null;
   sidebarItems!: ItemModel[];
   sidebarOptions: any = {
@@ -28,38 +31,24 @@ export class LeaveComponent implements OnInit {
       routerLink: ['/leave/delete'],
     },
   };
-  constructor(private router: Router, private fetchUser: FetchLeavesService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.userContext = sessionStorage.getItem('role');
-    if (this.userContext) {
-      //Validation of user context is required. Skipping this for assignment
-      this.setPermission();
-      //this.navigateToListLeaves();
-    } else {
-      this.fetchUser.fetchRole().subscribe((data: any) => {
-        this.userContext = JSON.stringify(data[0]);
-        sessionStorage.setItem('role', this.userContext);
-        this.setPermission();
-        //this.navigateToListLeaves();
-      });
-    }
+    this.subscriptions.add(this.authService.userPermissionsReceived.subscribe(res => {
+      this.parsePermissions(res);
+    }));
   }
-  // navigateToListLeaves() {
-  //   this.router.navigateByUrl('leave/list');
-  // }
-  setPermission() {
-    const visibleActions = JSON.parse('' + this.userContext);
+  parsePermissions(permission: Permission[]) {
     const tempPermArr: ItemModel[] = [];
-    visibleActions.actions.forEach((action: any) => {
-      if (action.permission) {
-        action.permission.forEach((permission: any) => {
-          if (permission.isPermit === 1) {
-            tempPermArr.push(this.sidebarOptions[permission['name']]);
-          }
-        });
+    permission.forEach((permission: any) => {
+      if (permission.isPermit === 1) {
+        tempPermArr.push(this.sidebarOptions[permission['name']]);
       }
     });
     this.sidebarItems = [...tempPermArr];
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }

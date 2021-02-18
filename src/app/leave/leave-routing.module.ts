@@ -1,3 +1,5 @@
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthGuard } from './../utils/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreateLeaveComponent } from './create-leave/create-leave.component';
@@ -13,16 +15,32 @@ const routes: Routes = [
     children:[
       {
         path:'create',
-        component: CreateLeaveComponent
+        component: CreateLeaveComponent,
+        canActivate: [AuthGuard],
+        data: {
+          selector: 'leave_create'
+        }
       },
 
       {
         path:'delete',
-        component: DeleteLeaveComponent
+        component: DeleteLeaveComponent,
+        canActivate: [AuthGuard],
+        data: {
+          selector: 'leave_delete'
+        }
       },
       {
         path:'list',
-        component:ListLeavesComponent
+        component:ListLeavesComponent,
+        canActivate: [AuthGuard],
+        data: {
+          selector: 'leave_list'
+        }
+      },
+      {
+        path: '**',
+        redirectTo: 'list'
       }
     ]
   }
