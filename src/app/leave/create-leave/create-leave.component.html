@@ -20,10 +20,20 @@
       <label for="leavetype">Priority</label>
       <input id="leavetype" formControlName="priority" type="text" pInputText>
     </div>
-    <div class="p-field p-col-12">
-      <label for="leavetype">Purpose</label>
-      <input id="leavetype" formControlName="purpose" type="text" pInputText>
+    <div class="p-field p-col-12" formArrayName="purpose">
+      <div *ngFor="let purpose of leaveForm.controls.purpose?.value; let i = index">
+        <ng-container>
+          <input [formControlName]="leaveForm.controls.purpose?.value[i]" placeholder="Purpose">
+        </ng-container>
+
+      </div>
+      <button pButton type="button" (click)="addPurpose()">Add</button>
+      <!-- <label for="leavetype">Purpose</label>
+      <input id="leavetype"  type="text" pInputText> -->
     </div>
+
+
+
     <div class="p-field p-col-12 p-md-12">
       <button pButton type="submit" label="Submit" [disabled]="!leaveForm.valid"></button>
     </div>
