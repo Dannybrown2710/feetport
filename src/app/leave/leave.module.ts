@@ -15,7 +15,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ToggleButtonModule} from 'primeng/togglebutton';
-
+import {MessagesModule} from 'primeng/messages';
 @NgModule({
   declarations: [LeaveComponent, CreateLeaveComponent, DeleteLeaveComponent, ListLeavesComponent],
   imports: [
@@ -25,6 +25,7 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
     LeaveRoutingModule,
     TableModule,
     MessageModule,
+    MessagesModule,
     ButtonModule,
     ReactiveFormsModule,
     InputTextModule,

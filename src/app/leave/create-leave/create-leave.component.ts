@@ -1,3 +1,4 @@
+import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -44,13 +45,25 @@ export class CreateLeaveComponent implements OnInit {
   createPurpose() {
     return new FormControl('', Validators.required);
   }
-  removePurpose(index: number){
+  removePurpose(index: number) {
     this.purpose.removeAt(index);
   }
   validatePurpose(control: AbstractControl): { [key: string]: any } | null {
-    if (control.value && control.value.length <= 0) {
-      return { purposeInvalid: true };
+    console.log(control.value);
+    console.log(control.valid);
+    if (control.value.length <= 0) {
+      return { invalid: true  };
     }
+    let tempVal = null;
+    control.value.forEach((val: any) => {
+      if (val === ''){
+        tempVal = false;
+       }
+    });
+    if(tempVal === false){
+      return { invalid: true };
+    }
+
     return null;
   }
 
