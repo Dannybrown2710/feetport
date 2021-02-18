@@ -9,18 +9,19 @@ import {
   Validators,
 } from '@angular/forms';
 import { MessageService, SelectItem } from 'primeng/api';
+import { CreateLeaveService } from '../create-leave.service';
 
 @Component({
   selector: 'app-create-leave',
   templateUrl: './create-leave.component.html',
   styleUrls: ['./create-leave.component.css'],
-  providers: [MessageService],
+  providers: [MessageService, CreateLeaveService],
 })
 export class CreateLeaveComponent implements OnInit {
   purpose = new FormArray([this.createPurpose()], this.validatePurpose);
   leaveForm = this.fb.group({
     leavetype: new FormControl('', Validators.required),
-    is_caary_forward: new FormControl('', Validators.required),
+    is_caary_forward: new FormControl(false, Validators.required),
     priority: new FormControl('', Validators.required),
     code: new FormControl('', Validators.required),
     is_proof_required: new FormControl(false, Validators.required),
@@ -30,7 +31,8 @@ export class CreateLeaveComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private createLeaveService: CreateLeaveService
   ) {}
 
   ngOnInit() {
@@ -76,5 +78,6 @@ export class CreateLeaveComponent implements OnInit {
       sticky: true,
     });
     console.log(this.leaveForm.value);
+    this.createLeaveService.createLeaveRequest(this.leaveForm.value).subscribe(data => console.log(data));
   }
 }
