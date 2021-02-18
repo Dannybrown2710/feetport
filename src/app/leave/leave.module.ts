@@ -9,10 +9,12 @@ import { ListLeavesComponent } from './list-leaves/list-leaves.component';
 import { LeaveRoutingModule } from './leave-routing.module';
 import {TableModule} from 'primeng/table';
 import { FetchLeavesService } from './fetch-leaves.service';
-import { MessageService } from 'primeng/api';
 import { MessageModule } from 'primeng/message';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import {CheckboxModule} from 'primeng/checkbox';
+import {ToggleButtonModule} from 'primeng/togglebutton';
 
 @NgModule({
   declarations: [LeaveComponent, CreateLeaveComponent, DeleteLeaveComponent, ListLeavesComponent],
@@ -23,8 +25,11 @@ import { InputTextModule } from 'primeng/inputtext';
     LeaveRoutingModule,
     TableModule,
     MessageModule,
+    ButtonModule,
     ReactiveFormsModule,
-    InputTextModule
+    InputTextModule,
+    CheckboxModule,
+    ToggleButtonModule
   ],
   providers:[FetchLeavesService]
 })

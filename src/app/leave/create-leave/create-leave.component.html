@@ -1,24 +1,31 @@
-<form [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)">
+<form [formGroup]="leaveForm" (ngSubmit)="onSubmit(leaveForm.value)">
   <div class="p-fluid p-formgrid p-grid">
     <div class="p-field p-col-12 p-md-6">
-        <label for="firstname">Firstname</label>
-        <input id="firstname" type="text" pInputText>
+      <label for="leavetype">Leave Type</label>
+      <input id="leavetype" formControlName="leavetype" type="text" pInputText>
     </div>
     <div class="p-field p-col-12 p-md-6">
-        <label for="lastname">Lastname</label>
-        <input id="lastname" type="text" pInputText>
+      <label for="leavetype">Code</label>
+      <input id="leavetype" formControlName="code" type="text" pInputText>
     </div>
     <div class="p-field p-col-12">
-        <label for="address">Address</label>
-        <textarea id="address" type="text" rows="4" pInputText></textarea>
+      <p-toggleButton id="ispr" onIcon="pi pi-check" offIcon="pi pi-times" formControlName="is_proof_required"></p-toggleButton>
+      <label for="ispr" style="margin-left: 10px">Is Proof Required</label>
     </div>
-    <div class="p-field p-col-12 p-md-6">
-        <label for="city">City</label>
-        <input id="city" type="text" pInputText>
+    <div class="p-field p-col-12">
+      <p-toggleButton id="iscr"  onIcon="pi pi-check"  offIcon="pi pi-times" formControlName="is_caary_forward"></p-toggleButton>
+      <label for="iscr" style="margin-left: 10px">Is Carry Forward</label>
     </div>
-    <div class="p-field p-col-12 p-md-3">
-        <label for="zip">Zip</label>
-        <input id="zip" type="text" pInputText>
+    <div class="p-field p-col-12">
+      <label for="leavetype">Priority</label>
+      <input id="leavetype" formControlName="priority" type="text" pInputText>
     </div>
-</div>
+    <div class="p-field p-col-12">
+      <label for="leavetype">Purpose</label>
+      <input id="leavetype" formControlName="purpose" type="text" pInputText>
+    </div>
+    <div class="p-field p-col-12 p-md-12">
+      <button pButton type="submit" label="Submit" [disabled]="!leaveForm.valid"></button>
+    </div>
+  </div>
 </form>

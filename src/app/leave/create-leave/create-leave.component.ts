@@ -9,45 +9,25 @@ import { MessageService, SelectItem } from 'primeng/api';
   providers: [MessageService]
 })
 export class CreateLeaveComponent implements OnInit {
-  userform = this.fb.group({
-    firstname: new FormControl('', Validators.required),
-    lastname: new FormControl('', Validators.required),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-    ]),
-    brand: new FormControl(''),
-    city: new FormControl(''),
-    description: new FormControl(''),
+  leaveForm = this.fb.group({
+    leavetype: new FormControl('', Validators.required),
+    is_caary_forward: new FormControl('', Validators.required),
+    priority: new FormControl('',Validators.required),
+    code: new FormControl('', Validators.required),
+    is_proof_required: new  FormControl(false, Validators.required),
+    purpose: new FormControl('', Validators.required)
+    // lastname: new FormControl('', Validators.required),
+    // password: new FormControl('', [
+    //   Validators.required,
+    //   Validators.minLength(6),
+    // ]),
+    // brand: new FormControl(''),
+    // city: new FormControl(''),
+    // description: new FormControl(''),
   });
   submitted: boolean = false;
 
-  genders: SelectItem[] = [];
 
-  description!: string;
-
-  brands: string[] = [
-    'Audi',
-    'BMW',
-    'Fiat',
-    'Ford',
-    'Honda',
-    'Jaguar',
-    'Mercedes',
-    'Renault',
-    'Volvo',
-    'VW',
-  ];
-
-  filteredBrands: any[] = [];
-
-  cities = [
-    { name: 'New York', code: 'NY' },
-    { name: 'Rome', code: 'RM' },
-    { name: 'London', code: 'LDN' },
-    { name: 'Istanbul', code: 'IST' },
-    { name: 'Paris', code: 'PRS' },
-  ];
 
   constructor(
     private fb: FormBuilder,
@@ -55,18 +35,18 @@ export class CreateLeaveComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
+    console.log(this.leaveForm.valid)
   }
 
-  filterBrands(event: any) {
-    this.filteredBrands = [];
-    for (let i = 0; i < this.brands.length; i++) {
-      let brand = this.brands[i];
-      if (brand.toLowerCase().indexOf(event.query.toLowerCase()) == 0) {
-        this.filteredBrands.push(brand);
-      }
-    }
-  }
+  // filterBrands(event: any) {
+  //   this.filteredBrands = [];
+  //   for (let i = 0; i < this.brands.length; i++) {
+  //     let brand = this.brands[i];
+  //     if (brand.toLowerCase().indexOf(event.query.toLowerCase()) == 0) {
+  //       this.filteredBrands.push(brand);
+  //     }
+  //   }
+  // }
 
   onSubmit(value: string) {
     this.submitted = true;
@@ -76,9 +56,7 @@ export class CreateLeaveComponent implements OnInit {
       detail: 'Form Submitted',
       sticky: true,
     });
+    console.log(this.leaveForm.value)
   }
 
-  get diagnostic() {
-    return JSON.stringify(this.userform.value);
-  }
 }
