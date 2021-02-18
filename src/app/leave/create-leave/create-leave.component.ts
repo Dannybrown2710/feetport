@@ -16,13 +16,14 @@ import { MessageService, SelectItem } from 'primeng/api';
   providers: [MessageService],
 })
 export class CreateLeaveComponent implements OnInit {
+  purpose = new FormArray([], this.validatePurpose);
   leaveForm = this.fb.group({
     leavetype: new FormControl('', Validators.required),
     is_caary_forward: new FormControl('', Validators.required),
     priority: new FormControl('', Validators.required),
     code: new FormControl('', Validators.required),
     is_proof_required: new FormControl(false, Validators.required),
-    purpose: new FormArray([], this.validatePurpose),
+    purpose: this.purpose,
   });
   submitted: boolean = false;
 
@@ -36,7 +37,8 @@ export class CreateLeaveComponent implements OnInit {
   }
 
   addPurpose() {
-    (this.leaveForm.get('purpose') as FormArray).push(this.createPurpose());
+    //(this.leaveForm.get('purpose') as FormArray).push(this.createPurpose());
+    this.purpose.push(new FormControl(''));
     console.log(this.leaveForm.value);
   }
   createPurpose() {

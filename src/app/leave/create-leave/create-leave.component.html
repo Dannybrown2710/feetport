@@ -21,9 +21,9 @@
       <input id="leavetype" formControlName="priority" type="text" pInputText>
     </div>
     <div class="p-field p-col-12" formArrayName="purpose">
-      <div *ngFor="let purpose of leaveForm.controls.purpose?.value; let i = index">
+      <div *ngFor="let pur of purpose.controls; let i = index">
         <ng-container>
-          <input [formControlName]="leaveForm.controls.purpose?.value[i]" placeholder="Purpose">
+          <input [formControlName]="i" placeholder="Purpose">
         </ng-container>
 
       </div>
