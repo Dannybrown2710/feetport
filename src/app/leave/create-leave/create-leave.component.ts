@@ -8,7 +8,7 @@ import { MessageService, SelectItem } from 'primeng/api';
   styleUrls: ['./create-leave.component.css'],
   providers: [MessageService]
 })
-export class CreateLeaveComponent implements OnInit {
+export class CreateLeaveComponent {
   leaveForm = this.fb.group({
     leavetype: new FormControl('', Validators.required),
     is_caary_forward: new FormControl('', Validators.required),
@@ -34,10 +34,6 @@ export class CreateLeaveComponent implements OnInit {
     private messageService: MessageService
   ) {}
 
-  ngOnInit() {
-    console.log(this.leaveForm.valid)
-  }
-
   // filterBrands(event: any) {
   //   this.filteredBrands = [];
   //   for (let i = 0; i < this.brands.length; i++) {
@@ -56,7 +52,6 @@ export class CreateLeaveComponent implements OnInit {
       detail: 'Form Submitted',
       sticky: true,
     });
-    console.log(this.leaveForm.value)
   }
 
 }
